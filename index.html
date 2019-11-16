@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Please Register</title>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<!------ toujours inclure ce qui est en haut en haut---------->
+
+</head>
+<body>
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- les titres mec -->
+
+    <!-- bonbon picture -->
+    <div class="fadeIn first">
+      <h1><img src="https://www.zupimages.net/up/19/46/let7.png" width="24" height="24">
+      Complete this form</h1>
+    </div>
+
+    <!-- Formulaire de login -->
+    <form method="get" id="compte">
+      
+      <input type="email" id="login" class="fadeIn second" name="Email" placeholder="Email" required>
+      
+      <input type="name" id="login" class="fadeIn second" name="Name" placeholder="Name" maxlength="12"required >
+
+       <input type="first_Name" id="login" class="fadeIn second" name="First_Name" placeholder="First_name" maxlength="12" required>
+
+       <input type="date" id="login" class="fadeIn second" name="Birth_date" placeholder="Birth_date" required><br>
+
+       <label for="country">Nationality</label><br>
+
+                    <select name="country" id="country">
+                        <option>-- Choose your country --</option>
+                        <option value="IL">Israel</option>
+                        <option value="CM">Cameroun</option>
+                        <option value="FR">France</option>
+                        <option value="IN">India</option>
+                    </select>
+
+       <input type="tel" id="login" class="fadeIn second" name="Phone_number" placeholder="Phone_number" required>
+      
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password"  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,}$" title="Your password must contained at least one upper case, one lower case, one integer and have to be composed with minimum 6 caracters." required>
+      
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password_Confirmation" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,}$" title="Your password must contained at least one upper case, one lower case, one integer and have to be composed with minimum 6 caracters." required>
+
+      <a href="https://johnrice0174.github.io/candyshop.hcktn1/"><input type="submit" class="fadeIn fourth" value="Subscription"></a>
+
+    </form>
+
+    <!-- Footer de...-->
+    <div id="formFooter">
+
+          
+      
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  //vérifier si le formulaire OPPPPPP, stp!!!!
+let stateCheck = setInterval(() => {
+    if(document.readyState ==='complete'){
+        pageInit();
+        clearInterval(stateCheck);
+    }
+}, 100);
+
+//t'ajoute un petit listener sur le tout
+ function pageInit(){
+  document.querySelector('#compte').addEventListener('submit', validationDuFormulaire);
+ }
+
+function validationDuFormulaire(evenement1){
+    //faire en sorte que l'envoi du formu se fasse normalement
+    evenement1.preventDefault();
+
+    //effacer les précédents messages de validations s'il y en a
+    document.querySelectorAll('.msg').forEach((msg) => {
+        msg.parentNode.removeChild(msg);
+    });
+
+    let validation_de_ceci = true;
+
+    let les_champs = document.querySelectorAll('input[required], select[required], input[maxlength]');
+
+   //les petites boubles autour des champs pour les valider
+    les_champs.forEach((champignon) => {
+        if(champignon.checkValidity()){
+            //ici comme ça on ajoute une classe champignon si le champs est valide
+            champignon.className = 'valid';
+            //ne pas hésiter à faire des: console.log(champignon.validity);
+        }else{
+            //on assigne la variable valid à false
+            valid = false;
+            //on ajoute la classe invalid si le champ est valide
+            champignon.className = 'invalid';
+            //Encore ne pas hésiter à faire des: console.log(champignon.validity);
+
+            //on donne un message par défaut ou un titre si ya rien
+            let message = champignon.title ? champignon.title : champignon.validationMessage;
+            //ajouter un validation message dans le Dom
+            champignon.parentNode.insertAdjacentHTML('beforeend', `<span class="msg error-msg">${message}</span>`);
+          
+        }//end if else checkValidity()
+    });//ici la fin du forEach()
+    //envoyer le formulaire si la variable valid est évaluée à vraie (si aucun champs sont estampillé invalid)
+    if(valid){
+        evenement1.target.submit();
+    }
+}
+</script>
+
+</body>
+</html>
+
+
+
